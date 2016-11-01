@@ -15,5 +15,18 @@ namespace Assets.Scripts
         bool bInEncounter;
         public List<Dungeon> listDungeons;
         public Dungeon currentDungeon;
+
+        public string toString()
+        {
+            string writeString = "";
+            if(listParty != null)
+            {
+                foreach (Hero h in listParty)
+                {
+                    writeString.Insert(writeString.Length, h.sName);
+                }
+            }
+            return writeString;
+        }
     }
 }

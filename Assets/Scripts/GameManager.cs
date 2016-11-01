@@ -11,15 +11,22 @@ public class GameManager : MonoBehaviour {
     Canvas promptWindowCanvas;
     public Hero clientHero;
     Boolean bClientIsDM;
+    int iterator;
     public JavaNetworkDungeonsProtocol jndp;
 	// Use this for initialization
 	void Start () {
         promptWindowManager = GetComponentInChildren<PromptWindowManager>();
-        jndp = new JavaNetworkDungeonsProtocol(promptWindowManager);
+        jndp = GetComponent<JavaNetworkDungeonsProtocol>();
     }
 	
 	// Update is called once per frame
 	void Update () {
         jndp.update();
+        if(iterator == 50)
+        {
+            Debug.Log(activeCampaign.toString());
+            iterator = 0;
+        }
+        iterator++;
 	}
 }

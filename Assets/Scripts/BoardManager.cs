@@ -33,13 +33,15 @@ namespace Assets.Scripts
             int row = 0;
             int col = 0;
             this.currentDungeon = gm.activeCampaign.currentDungeon;
-            foreach (List<DungeonTile> dungeonTileList in currentDungeon.dungeonMap)
+            if (currentDungeon != null)
             {
-                foreach (DungeonTile dTile in dungeonTileList)
+                foreach (List<DungeonTile> dungeonTileList in currentDungeon.dungeonMap)
                 {
-                    GameObject instantiatedTile = null;
-                    //if (dTile.dictHeroVisibility[gm.clientHero])
-                    //{
+                    foreach (DungeonTile dTile in dungeonTileList)
+                    {
+                        GameObject instantiatedTile = null;
+                        //if (dTile.dictHeroVisibility[gm.clientHero])
+                        //{
                         if (dTile.wall)
                         {
                             switch (dTile.lightLevel)
@@ -76,15 +78,16 @@ namespace Assets.Scripts
                                     break;
                             }
                         }
-                    //}
-                    //else
-                    //{
-                    //    instantiatedTile = (GameObject)Instantiate(darknessTile);
-                    //}
-                    col++;
-                    instantiatedTile.transform.Translate(new Vector3(32 * row, 32 * col, 0));
+                        //}
+                        //else
+                        //{
+                        //    instantiatedTile = (GameObject)Instantiate(darknessTile);
+                        //}
+                        col++;
+                        instantiatedTile.transform.Translate(new Vector3(32 * row, 32 * col, 0));
+                    }
+                    row++;
                 }
-                row++;
             }
         }
     }

@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading;
+using Unity.IO.Compression;
 using UnityEngine;
 
 namespace Assets.Scripts
@@ -17,9 +18,8 @@ namespace Assets.Scripts
         // ManualResetEvent instances signal completion.
         private const int port = 555;
         int iterator = 0;
-        public JavaNetworkDungeonsProtocol(PromptWindowManager promptWindowManager)
+        public JavaNetworkDungeonsProtocol()
         {
-            this.promptWindowManager = promptWindowManager;
         }
         public void write(String s)
         {
@@ -32,15 +32,17 @@ namespace Assets.Scripts
         }
         public void processInput()
         {
-            byte[] bytes = new byte[8192];
+            //GZipStream gZipStream = new GZipStream(new NetworkStream(tcpSocket), CompressionMode.Decompress);
+            byte[] bytes = new byte[1000000];
             Debug.Log(tcpSocket.Available);
             if(tcpSocket.Available >= 1)
             {
-
                 Debug.Log("Created bytes, recieving from TCPSocket");
-                int bytesRec = tcpSocket.Receive(bytes);
+                int bytesRecieved = 1000000;
+                bytesRecieved = tcpSocket.Receive(bytes);
+                //gZipStream.Read(bytes, 0, 1000000);
                 Debug.Log("Bytes: " + bytes);
-                string sInput = Encoding.ASCII.GetString(bytes, 0, bytesRec);
+                string sInput = Encoding.ASCII.GetString(bytes, 0, bytesRecieved);
                 Debug.Log("Processing input: " + sInput);
                 List<String> listInputs = new List<String>();
                 while (sInput.Contains("<EOF>"))
@@ -62,6 +64,7 @@ namespace Assets.Scripts
         }
         public void update()
         {
+            this.promptWindowManager = GetComponentInChildren<PromptWindowManager>();
             iterator++;
             if(iterator == 50 && tcpSocket != null)
             {
@@ -84,6 +87,18 @@ namespace Assets.Scripts
             if (s.Contains("listParty"))
             {
                 GetComponent<GameManager>().activeCampaign = JsonUtility.FromJson<Campaign>(s);
+            }
+            if (s.Contains("Sending Dungeon of size: "))
+            {
+                int size = int.Parse(s.Substring(24));
+                Debug.Log(size);
+                for (int r = 0; r < size; r++)
+                {
+                    for (int c = 0; c < size; c++)
+                    {
+
+                    }
+                }
             }
         }
     }

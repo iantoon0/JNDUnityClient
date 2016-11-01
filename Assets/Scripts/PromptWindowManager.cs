@@ -22,7 +22,7 @@ namespace Assets.Scripts
             button = GetComponentInChildren<Button>();
             button.onClick.AddListener(SubmitChoices);
             promptText.text = "Enter the address to connect to";
-            this.jndp = GetComponentInParent<GameManager>().jndp;
+            this.jndp = GetComponentInParent<JavaNetworkDungeonsProtocol>();
         }
         // Update is called once per frame
         void Update()
@@ -56,7 +56,7 @@ namespace Assets.Scripts
                     dropdowns = GetComponentsInChildren<Dropdown>();
                     button = GetComponentInChildren<Button>();
                     button.onClick.AddListener(SubmitChoices);
-                    promptText.text = "Enter the address to connect to";
+                    promptText.text = p.sPromptTitle;
                     break;
                 case 3:
                     createdPanel = (GameObject)Instantiate(dropdown3Panel, transform);
@@ -67,7 +67,7 @@ namespace Assets.Scripts
                     dropdowns = GetComponentsInChildren<Dropdown>();
                     button = GetComponentInChildren<Button>();
                     button.onClick.AddListener(SubmitChoices);
-                    promptText.text = "Enter the address to connect to";
+                    promptText.text = p.sPromptTitle;
                     break;
                 default: break;
             }
@@ -85,7 +85,7 @@ namespace Assets.Scripts
                 {
                     writeString.Insert(writeString.Length, d.options[d.value].text);
                 }
-                jndp.write(writeString);
+                jndp.write(writeString + "\n");
             }
             Destroy(createdPanel);
             createdPanel = null;
