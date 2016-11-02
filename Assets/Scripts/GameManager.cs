@@ -6,9 +6,8 @@ using System.Collections;
 using Assets.Scripts;
 
 public class GameManager : MonoBehaviour {
-    public Campaign activeCampaign = new Campaign();
+    public Campaign activeCampaign;
     PromptWindowManager promptWindowManager;
-    Canvas promptWindowCanvas;
     public Hero clientHero;
     Boolean bClientIsDM;
     int iterator;
@@ -24,7 +23,6 @@ public class GameManager : MonoBehaviour {
         jndp.update();
         if(iterator == 50)
         {
-            Debug.Log(activeCampaign.toString());
             iterator = 0;
         }
         iterator++;

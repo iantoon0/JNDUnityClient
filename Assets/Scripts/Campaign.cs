@@ -6,11 +6,12 @@ using System.Threading;
 
 namespace Assets.Scripts
 {
+    [System.Serializable]
     public class Campaign
     {
-        private List<Hero> listParty;
-        private List<Spell> listActiveSpells;
-        private Dictionary<String, List<TextMessage>> dictChatLog;
+        public List<Hero> listParty;
+        List<Spell> listActiveSpells;
+        Dictionary<String, List<TextMessage>> dictChatLog;
         public Time currentTime;
         bool bInEncounter;
         public List<Dungeon> listDungeons;

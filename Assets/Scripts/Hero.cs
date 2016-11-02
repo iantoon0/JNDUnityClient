@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace Assets.Scripts
 {
+    [System.Serializable]
     public class Hero : EncounterActor
     {
         public int iLevel, iXP, iProficiencyBonus, iNextLvlXP, iGold, iHPGainedPerLevel, iHitDie, iTotalNumHitDice, iCurrentNumHitDice;

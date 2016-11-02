@@ -6,6 +6,7 @@ using System.Threading;
 
 namespace Assets.Scripts
 {
+    [System.Serializable]
     class Spell
     {
         private int iRange;

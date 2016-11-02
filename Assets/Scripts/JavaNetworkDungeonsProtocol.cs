@@ -37,11 +37,9 @@ namespace Assets.Scripts
             Debug.Log(tcpSocket.Available);
             if(tcpSocket.Available >= 1)
             {
-                Debug.Log("Created bytes, recieving from TCPSocket");
                 int bytesRecieved = 1000000;
                 bytesRecieved = tcpSocket.Receive(bytes);
                 //gZipStream.Read(bytes, 0, 1000000);
-                Debug.Log("Bytes: " + bytes);
                 string sInput = Encoding.ASCII.GetString(bytes, 0, bytesRecieved);
                 Debug.Log("Processing input: " + sInput);
                 List<String> listInputs = new List<String>();
@@ -49,6 +47,7 @@ namespace Assets.Scripts
                 {
                     listInputs.Add(sInput.Substring(0, sInput.IndexOf("<EOF>")));
                     sInput = sInput.Substring(sInput.IndexOf("<EOF>") + 5);
+                    Debug.Log("Found EOF");
                 }
                 foreach (String s in listInputs)
                 {
@@ -87,6 +86,19 @@ namespace Assets.Scripts
             if (s.Contains("listParty"))
             {
                 GetComponent<GameManager>().activeCampaign = JsonUtility.FromJson<Campaign>(s);
+                if (GetComponent<GameManager>().activeCampaign != null)
+                {
+                    Debug.Log("Active Campaign isn't null!");
+                    Debug.Log(GetComponent<GameManager>().activeCampaign.toString());
+                }
+                if (GetComponent<GameManager>().activeCampaign.currentDungeon != null)
+                {
+                    Debug.Log("Current dungeon isn't null!");
+                }
+                if (GetComponent<GameManager>().activeCampaign.listParty != null)
+                {
+                    Debug.Log("listParty isn't null!");
+                }
             }
             if (s.Contains("Sending Dungeon of size: "))
             {

@@ -32,9 +32,10 @@ namespace Assets.Scripts
         {
             int row = 0;
             int col = 0;
-            this.currentDungeon = gm.activeCampaign.currentDungeon;
             if (currentDungeon != null)
             {
+                this.currentDungeon = gm.activeCampaign.currentDungeon;
+                Debug.Log("CurrentDungeon != null!!!");
                 foreach (List<DungeonTile> dungeonTileList in currentDungeon.dungeonMap)
                 {
                     foreach (DungeonTile dTile in dungeonTileList)
@@ -42,7 +43,7 @@ namespace Assets.Scripts
                         GameObject instantiatedTile = null;
                         //if (dTile.dictHeroVisibility[gm.clientHero])
                         //{
-                        if (dTile.wall)
+                        if (dTile.bWall)
                         {
                             switch (dTile.lightLevel)
                             {

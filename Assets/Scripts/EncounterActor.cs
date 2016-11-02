@@ -6,7 +6,8 @@ using System.Threading;
 
 namespace Assets.Scripts
 {
-    
+
+    [System.Serializable]
     public class EncounterActor
     {
         private int iStr, iCon, iDex, iIntel, iWis, iCha;

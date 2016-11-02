@@ -6,10 +6,11 @@ using System.Threading;
 
 namespace Assets.Scripts
 {
+    [System.Serializable]
     class Item
     {
-        private int iWeight, iValue;
-        private string sName;
-        private bool bHidden;
+        public int iWeight, iValue;
+        public string sName;
+        public bool bHidden;
     }
 }

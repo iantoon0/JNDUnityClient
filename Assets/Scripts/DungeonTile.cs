@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts
 {
+    [System.Serializable]
     public class DungeonTile
     {
         public Point loc;
@@ -14,6 +15,6 @@ namespace Assets.Scripts
         public Dictionary<Hero, Boolean> dictHeroVisibility;
         public EncounterActor encounterActor;
         public int lightLevel; //0-3, Magic dark/Total dark/Dim/Bright
-        public bool wasSeen, wall, lightLevelCalculated;
+        public bool bWasSeen, bWall, bLightLevelCalculated, bIsDifficultTerrain;
     }
 }

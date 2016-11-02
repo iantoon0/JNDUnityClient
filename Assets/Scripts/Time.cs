@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts
 {
+    [System.Serializable]
     public class Time
     {
         int iMinute, iHour, iDay, iMonth, iYear;

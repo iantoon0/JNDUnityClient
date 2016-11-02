@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts
 {
+    [System.Serializable]
     public class Dungeon
     {
         public List<List<DungeonTile>> dungeonMap;
