@@ -5,6 +5,7 @@ using System.Text;
 
 namespace Assets.Scripts.Classes
 {
+    [System.Serializable]
     class Rogue : Hero
     {
     }
