@@ -32,9 +32,12 @@ namespace Assets.Scripts
         {
             int row = 0;
             int col = 0;
-            if (currentDungeon != null)
+            if (gm.activeCampaign.currentDungeon != null)
             {
                 this.currentDungeon = gm.activeCampaign.currentDungeon;
+            }
+            if (currentDungeon.dungeonMap != null)
+            {
                 Debug.Log("CurrentDungeon != null!!!");
                 foreach (List<DungeonTile> dungeonTileList in currentDungeon.dungeonMap)
                 {
