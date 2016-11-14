@@ -23,6 +23,7 @@ namespace Assets.Scripts
         }
         public void write(String s)
         {
+            Debug.Log("Sending " + s);
             List<byte> listToSend = new List<byte>();
             foreach(char c in s.ToCharArray())
             {
@@ -37,8 +38,8 @@ namespace Assets.Scripts
             Debug.Log(tcpSocket.Available);
             if(tcpSocket.Available >= 1)
             {
-                int bytesRecieved = 1000000;
-                bytesRecieved = tcpSocket.Receive(bytes);
+                //int bytesRecieved = 1000000;
+                int bytesRecieved = tcpSocket.Receive(bytes);
                 //gZipStream.Read(bytes, 0, 1000000);
                 string sInput = Encoding.ASCII.GetString(bytes, 0, bytesRecieved);
                 Debug.Log("Processing input: " + sInput);
