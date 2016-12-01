@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
-using System.Collections;
+using System.Collections.Generic;
 namespace Assets.Scripts
 {
     public class PromptWindowManager : MonoBehaviour
@@ -81,10 +81,12 @@ namespace Assets.Scripts
             else
             {
                 string writeString = "";
-                foreach(Dropdown d in dropdowns)
+                foreach (Dropdown d in dropdowns)
                 {
-                    writeString.Insert(writeString.Length, d.options[d.value].text);
+                    writeString += d.options[d.value].text.ToString() + ",";
+                    Debug.Log("Added " + d.options[d.value].text.ToString() + " to output");
                 }
+                Debug.Log("Writestring: " + writeString);
                 jndp.write(writeString + "\n");
             }
             Destroy(createdPanel);

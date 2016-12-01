@@ -13,14 +13,8 @@ namespace Assets.Scripts
         public int[] iArrayCurrentSpellSlots, iArrayMaxSpellSlots;
         public List<int> iArrayMaxHitDice, iArrayCurrentHitDice;
         public bool bInspiration;
-        public string sName, sRace, sClassName;
-        List<Spell> listSpellsKnown, listSpellsPrepared;
-        List<string> listProficiencies, listKnownCantrips, listLanguages, listSkillProficiencies;
-        Dictionary<string, int> dictSkills, dictClassLevels;
-        Dictionary<string, bool> dictFeats;
-        Dictionary<string, string> dictBackgroundTraits;
-
-        List<Item> listInventory;
+        public String sName, sRace, sClassName;
+        public List<String> listProficiencies, listCantripsKnown, listLanguages, listSkillProficiencies, listSpellsKnown, listSpellsPrepared, listFeats, listBackgroundTraits, listInventory;
 
         //Barbarian variables
 
@@ -29,9 +23,9 @@ namespace Assets.Scripts
 
 
         //Cleric variables
-        String sDomain;
-        int iChannelDivinity;
-        int iMaxChannelDivinity;
+        public String sDomain;
+        public int iChannelDivinity;
+        public int iMaxChannelDivinity;
 
         //Druid variables
 
@@ -42,8 +36,8 @@ namespace Assets.Scripts
         public int iActionSurge, iMaxActionSurge, iIndomitable, iMaxIndomitable, iSuperiorityDice, iMaxSuperiorityDice, iSpellSlots, iMaxSpellSlots;
 
         //Monk variables
-        int iMaxKi, iCurrentKi, iMonkDie, iUnarmoredSpeed;
-        String sPath;
+        public int iMaxKi, iCurrentKi, iMonkDie, iUnarmoredSpeed;
+        public String sPath;
 
         //Paladin variables
 
@@ -55,9 +49,9 @@ namespace Assets.Scripts
 
 
         //Sorcerer variables
-        String sorcerousOrigin;
-        int iCurrentSorceryPoints;
-        int iMaxSorceryPoints;
+        public String sorcerousOrigin;
+        public int iCurrentSorceryPoints;
+        public int iMaxSorceryPoints;
 
         //Warlock variables
 

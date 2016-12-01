@@ -35,9 +35,10 @@ namespace Assets.Scripts
         {
             //GZipStream gZipStream = new GZipStream(new NetworkStream(tcpSocket), CompressionMode.Decompress);
             byte[] bytes = new byte[1000000];
-            Debug.Log(tcpSocket.Available);
+            //Debug.Log(tcpSocket.Available);
             if(tcpSocket.Available >= 1)
             {
+                Debug.Log(tcpSocket.Available);
                 //int bytesRecieved = 1000000;
                 int bytesRecieved = tcpSocket.Receive(bytes);
                 //gZipStream.Read(bytes, 0, 1000000);
@@ -81,20 +82,31 @@ namespace Assets.Scripts
             if (s.Contains("sPromptTitle"))
             {
                 Debug.Log("Recieved prompt command!");
+                
                 Prompt p = JsonUtility.FromJson<Prompt>(s);
                 promptWindowManager.PromptPopup(p);
             }
-            if (s.Contains("listParty"))
+            if (s.Contains("currentTempDungeon"))
             {
                 GetComponent<GameManager>().activeCampaign = JsonUtility.FromJson<Campaign>(s);
+                Debug.Log("Making campaign from JSON");
+                if (GetComponent<GameManager>().activeCampaign.currentTempDungeon == null)
+                {
+                    Debug.Log("Current tempDungeon is null, you have entirely failed.");
+                }
+                if (GetComponent<GameManager>().activeCampaign.currentTempDungeon != null)
+                {
+                    Debug.Log("Current tempDungeon is not null");
+                }
+                GetComponent<GameManager>().activeCampaign.toNormalDungeons();
                 if (GetComponent<GameManager>().activeCampaign != null)
                 {
                     Debug.Log("Active Campaign isn't null!");
-                    Debug.Log(GetComponent<GameManager>().activeCampaign.toString());
+                    //Debug.Log(GetComponent<GameManager>().activeCampaign.toString());
                 }
-                if (GetComponent<GameManager>().activeCampaign.currentDungeon != null)
+                if (GetComponent<GameManager>().activeCampaign.currentDungeon.dungeonMap != null)
                 {
-                    Debug.Log("Current dungeon isn't null!");
+                    Debug.Log("Current dungeonmap isn't null!");
                 }
                 if (GetComponent<GameManager>().activeCampaign.listParty != null)
                 {

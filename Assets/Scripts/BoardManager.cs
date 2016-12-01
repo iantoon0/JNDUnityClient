@@ -6,6 +6,7 @@ namespace Assets.Scripts
     {
         public int columns;
         public int rows;
+        private int iterator;
         public GameManager gm;
         public Dungeon currentDungeon;
 
@@ -18,7 +19,7 @@ namespace Assets.Scripts
         public GameObject[] dimWallTiles;
         public GameObject[] darkWallTiles;
         public GameObject[] heroTiles;
-
+        public List<GameObject> previouslyInstantiatedTiles;
         private Transform boardHolder;
 
         // Use this for initialization
@@ -30,68 +31,95 @@ namespace Assets.Scripts
         // Update is called once per frame
         void Update()
         {
-            int row = 0;
-            int col = 0;
-            if (gm.activeCampaign.currentDungeon != null)
+            iterator++;
+            if(iterator == 3000)
             {
-                this.currentDungeon = gm.activeCampaign.currentDungeon;
-            }
-            if (currentDungeon.dungeonMap != null)
-            {
-                Debug.Log("CurrentDungeon != null!!!");
-                foreach (List<DungeonTile> dungeonTileList in currentDungeon.dungeonMap)
+                foreach(GameObject tileToBeDestroyed in previouslyInstantiatedTiles)
                 {
-                    foreach (DungeonTile dTile in dungeonTileList)
-                    {
-                        GameObject instantiatedTile = null;
-                        //if (dTile.dictHeroVisibility[gm.clientHero])
-                        //{
-                        if (dTile.bWall)
-                        {
-                            switch (dTile.lightLevel)
-                            {
-                                case 0:
-                                    instantiatedTile = (GameObject)Instantiate(darkWallTiles[(int)(Random.value * darkWallTiles.Length)]);
-                                    break;
-                                case 1:
-                                    instantiatedTile = (GameObject)Instantiate(darkWallTiles[(int)(Random.value * darkWallTiles.Length)]);
-                                    break;
-                                case 2:
-                                    instantiatedTile = (GameObject)Instantiate(dimWallTiles[(int)(Random.value * dimWallTiles.Length)]);
-                                    break;
-                                case 3:
-                                    instantiatedTile = (GameObject)Instantiate(brightWallTiles[(int)(Random.value * brightWallTiles.Length)]);
-                                    break;
-                            }
-                        }
-                        else
-                        {
-                            switch (dTile.lightLevel)
-                            {
-                                case 0:
-                                    instantiatedTile = (GameObject)Instantiate(darkFloorTiles[(int)(Random.value * darkFloorTiles.Length)]);
-                                    break;
-                                case 1:
-                                    instantiatedTile = (GameObject)Instantiate(darkFloorTiles[(int)(Random.value * darkFloorTiles.Length)]);
-                                    break;
-                                case 2:
-                                    instantiatedTile = (GameObject)Instantiate(dimFloorTiles[(int)(Random.value * dimFloorTiles.Length)]);
-                                    break;
-                                case 3:
-                                    instantiatedTile = (GameObject)Instantiate(brightFloorTiles[(int)(Random.value * brightFloorTiles.Length)]);
-                                    break;
-                            }
-                        }
-                        //}
-                        //else
-                        //{
-                        //    instantiatedTile = (GameObject)Instantiate(darknessTile);
-                        //}
-                        col++;
-                        instantiatedTile.transform.Translate(new Vector3(32 * row, 32 * col, 0));
-                    }
-                    row++;
+                    Destroy(tileToBeDestroyed);
                 }
+                int row = 0;
+                int col = 0;
+                if (gm.activeCampaign.currentDungeon != null)
+                {
+                    this.currentDungeon = gm.activeCampaign.currentDungeon;
+                }
+                if (currentDungeon.dungeonMap != null)
+                {
+                    Debug.Log("current dungeon map != null, laying out board");
+                    foreach (List<DungeonTile> dungeonTileList in currentDungeon.dungeonMap)
+                    {
+                        col = 0;
+                        foreach (DungeonTile dTile in dungeonTileList)
+                        {
+                            GameObject instantiatedTile = null;
+                            //if (dTile.dictHeroVisibility[gm.clientHero])
+                            //{
+                            if (dTile.bWall)
+                            {
+                                if (dTile.iTileType == -1)
+                                {
+                                    dTile.iTileType = (int)(Random.value * darkWallTiles.Length);
+                                }
+                                switch (dTile.iLightLevel)
+                                {
+                                    case 0:
+                                        instantiatedTile = (GameObject)Instantiate(darkWallTiles[dTile.iTileType]);
+                                        break;
+                                    case 1:
+                                        instantiatedTile = (GameObject)Instantiate(darkWallTiles[dTile.iTileType]);
+                                        break;
+                                    case 2:
+                                        instantiatedTile = (GameObject)Instantiate(dimWallTiles[dTile.iTileType]);
+                                        break;
+                                    case 3:
+                                        instantiatedTile = (GameObject)Instantiate(brightWallTiles[dTile.iTileType]);
+                                        break;
+                                }
+                            }
+                            else
+                            {
+                                if (dTile.iTileType == -1)
+                                {
+                                    dTile.iTileType = (int)(Random.value * darkFloorTiles.Length);
+                                }
+                                switch (dTile.iLightLevel)
+                                {
+                                    case 0:
+                                        instantiatedTile = (GameObject)Instantiate(darkFloorTiles[dTile.iTileType]);
+                                        break;
+                                    case 1:
+                                        instantiatedTile = (GameObject)Instantiate(darkFloorTiles[dTile.iTileType]);
+                                        break;
+                                    case 2:
+                                        instantiatedTile = (GameObject)Instantiate(dimFloorTiles[dTile.iTileType]);
+                                        break;
+                                    case 3:
+                                        instantiatedTile = (GameObject)Instantiate(brightFloorTiles[dTile.iTileType]);
+                                        break;
+                                }
+                            }
+                            //}
+                            //else
+                            //{
+                            //    instantiatedTile = (GameObject)Instantiate(darknessTile);
+                            //}
+                            //Debug.Log("Attempting to create new tile at (" + row * 32 + ", " + col * 32 + "). Better coords are (" + row + ", " + col + ")");
+                            if (instantiatedTile != null)
+                            {
+                                instantiatedTile.transform.Translate(new Vector3(row, col, 0));
+                                previouslyInstantiatedTiles.Add(instantiatedTile);
+                            }
+                            else
+                            {
+                                Debug.Log("Instantiated tile can't be transformed if it doesn't exist... (" + row + ", " + col + ")");
+                            }
+                            col++;
+                        }
+                        row++;
+                    }
+                }
+                iterator = 0;
             }
         }
     }
