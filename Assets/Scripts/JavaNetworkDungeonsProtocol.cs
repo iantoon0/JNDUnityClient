@@ -79,12 +79,17 @@ namespace Assets.Scripts
         }
         public void processInput(string s)
         {
-            if (s.Contains("sPromptTitle"))
+            if (s.Contains("iNumSelectable"))
             {
-                Debug.Log("Recieved prompt command!");
+                Debug.Log("Recieved ListPrompt command!");
                 
-                Prompt p = JsonUtility.FromJson<Prompt>(s);
+                ListPrompt p = JsonUtility.FromJson<ListPrompt>(s);
                 promptWindowManager.PromptPopup(p);
+            }
+            else if (s.Contains("sPromptTitle"))
+            {
+                OpenPrompt p = JsonUtility.FromJson<OpenPrompt>(s);
+                promptWindowManager.OpenPromptPopup(p);
             }
             if (s.Contains("currentTempDungeon"))
             {

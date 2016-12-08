@@ -32,7 +32,7 @@ namespace Assets.Scripts
         void Update()
         {
             iterator++;
-            if(iterator == 3000)
+            if(iterator == 300)
             {
                 foreach(GameObject tileToBeDestroyed in previouslyInstantiatedTiles)
                 {
@@ -46,7 +46,7 @@ namespace Assets.Scripts
                 }
                 if (currentDungeon.dungeonMap != null)
                 {
-                    Debug.Log("current dungeon map != null, laying out board");
+                    //Debug.Log("current dungeon map != null, laying out board");
                     foreach (List<DungeonTile> dungeonTileList in currentDungeon.dungeonMap)
                     {
                         col = 0;
@@ -112,7 +112,7 @@ namespace Assets.Scripts
                             }
                             else
                             {
-                                Debug.Log("Instantiated tile can't be transformed if it doesn't exist... (" + row + ", " + col + ")");
+                                Debug.Log("Instantiated tile can't be transformed if it doesn't exist... (" + row + ", " + col + "). Light level: " + dTile.iLightLevel);
                             }
                             col++;
                         }

@@ -6,7 +6,7 @@ namespace Assets.Scripts
 {
     public class HeroPanelManager : MonoBehaviour
     {
-        Hero h;
+        public Hero h;
         public Image playerImage;
         public Text nameText, infoText;
         private int iterator;
