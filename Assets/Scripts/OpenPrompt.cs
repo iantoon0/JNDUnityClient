@@ -5,10 +5,10 @@ using System.Text;
 
 namespace Assets.Scripts
 {
-    public class OpenPrompt
+    public class StringPrompt
     {
         public string sPromptTitle;
-        public OpenPrompt(string sPromptTitle)
+        public StringPrompt(string sPromptTitle)
         {
             this.sPromptTitle = sPromptTitle;
         }

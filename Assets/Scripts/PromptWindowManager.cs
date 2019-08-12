@@ -15,6 +15,8 @@ namespace Assets.Scripts
         // Use this for initialization
         void Start()
         {
+            // Prompts for a java address to connect to immediately
+            /*
             createdPanel = (GameObject) Instantiate(textPanel, transform);
             createdPanel.transform.position = new Vector3(0, 0, 0);
             createdPanel.transform.localPosition = new Vector3(0, 0, 0);
@@ -25,13 +27,14 @@ namespace Assets.Scripts
             button.onClick.AddListener(SubmitChoices);
             promptText.text = "Enter the address to connect to";
             this.jndp = GetComponentInParent<JavaNetworkDungeonsProtocol>();
+            */
         }
         // Update is called once per frame
         void Update()
         {
             iterator++;
         }
-        public void OpenPromptPopup(OpenPrompt p)
+        public void OpenPromptPopup(StringPrompt p)
         {
             Text[] textComponents = new Text[0];
             createdPanel = (GameObject)Instantiate(input1Panel, transform);

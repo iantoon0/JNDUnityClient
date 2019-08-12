@@ -16,6 +16,10 @@ namespace Assets.Scripts
         public String sName, sRace, sClassName;
         public List<String> listProficiencies, listCantripsKnown, listLanguages, listSkillProficiencies, listSpellsKnown, listSpellsPrepared, listFeats, listBackgroundTraits, listInventory;
 
+
+        public struct classVars {
+
+        };
         //Barbarian variables
 
 
